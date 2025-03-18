@@ -1,21 +1,22 @@
-/* General styles */
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth;
-    background-color: #111;
+    background-color: #0d1117;
     color: white;
+    scroll-behavior: smooth;
 }
 
-/* Navigation styles */
+/* Navigation */
 nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: black;
+    background: rgba(13, 17, 23, 0.9);
     padding: 15px 0;
     text-align: center;
+    backdrop-filter: blur(10px);
 }
 
 nav ul {
@@ -26,23 +27,25 @@ nav ul {
 
 nav ul li {
     display: inline;
-    margin: 0 15px;
+    margin: 0 20px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
     font-size: 18px;
-    padding: 8px 15px;
-    transition: 0.3s;
-}
-
-nav ul li a:hover {
-    background: gray;
+    font-weight: 600;
+    padding: 10px 15px;
+    transition: 0.3s ease;
     border-radius: 5px;
 }
 
-/* Section styles */
+nav ul li a:hover {
+    background: #1f6feb;
+    color: white;
+}
+
+/* Section Styling */
 section {
     height: 100vh;
     display: flex;
@@ -50,9 +53,4 @@ section {
     justify-content: center;
     text-align: center;
     padding: 50px;
-}
-
-#about { background: #222; }
-#experience { background: #333; }
-#education { background: #444; }
-#projects { background: #555; }
+   

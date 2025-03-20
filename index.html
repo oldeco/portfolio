@@ -3,86 +3,599 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <title>Allmin</title>
+    <title>Modern Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #121212 0%, #1e1e2e 50%, #2d2b42 100%);
+            color: #f0f0f0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, #c084fc, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #60a5fa;
+        }
+        
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 0;
+            min-height: calc(100vh - 120px);
+        }
+        
+        .hero-content {
+            flex: 1;
+            padding-right: 40px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            filter: grayscale(20%);
+        }
+        
+        .profile-circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(96, 165, 250, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .profile-circle::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #60a5fa;
+            font-weight: 500;
+        }
+        
+        p {
+            margin-bottom: 30px;
+            color: #c0c0c0;
+            font-size: 16px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #c084fc, #60a5fa);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(96, 165, 250, 0.3);
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 30px;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: #60a5fa;
+        }
+        
+        .social-icons i {
+            color: #f0f0f0;
+            font-size: 18px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .experience-grid, .skills-grid, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .experience-item, .project-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .experience-item:hover, .project-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .experience-item h4, .project-item h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .experience-item h5 {
+            font-size: 16px;
+            color: #60a5fa;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .experience-item .date {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        
+        .skill-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        
+        .skill-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .skill-info p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+        
+        .project-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .project-item .tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .project-item .tag {
+            background: rgba(96, 165, 250, 0.1);
+            color: #60a5fa;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #f0f0f0;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #60a5fa;
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        footer p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-top: 40px;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+            
+            .experience-grid, .skills-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="grid-2">
-        <div class="section-1">
-            <i class="fas fa-code fa-5x white"></i>
-            <h2>Allmin Pehlic</h2>
-            <p>Syracuse NY, USA</p>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a>
+    <div class="container">
+        <header>
+            <div class="logo">Portfolio.</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Hi, I'm Your Name</h1>
+                <h2>Senior Web Developer</h2>
+                <p>I build exceptional digital experiences that make people's lives simpler through thoughtful design and modern technology.</p>
+                <a href="#contact" class="btn">Get In Touch</a>
+                
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="profile-circle">
+                    <img src="/api/placeholder/400/400" alt="Your Name">
+                </div>
+            </div>
+        </section>
+        
+        <section id="about">
+            <div class="section-title">
+                <h3>About Me</h3>
+                <p>A passionate developer with expertise in creating interactive and responsive web applications.</p>
+            </div>
+            
+            <p>I'm a web developer with over 6 years of experience in building modern, responsive web applications. My journey in tech began when I created my first website at the age of 15, and I've been hooked ever since. I specialize in front-end development with a focus on creating intuitive user experiences that solve real problems.</p>
+            
+            <p>When I'm not coding, you can find me hiking in the mountains, experimenting with new cooking recipes, or contributing to open-source projects. I believe in continuous learning and am currently exploring machine learning and its applications in web development.</p>
+        </section>
+        
+        <section id="experience">
+            <div class="section-title">
+                <h3>Experience</h3>
+                <p>My professional journey through the tech industry.</p>
+            </div>
+            
+            <div class="experience-grid">
+                <div class="experience-item">
+                    <h4>Senior Web Developer</h4>
+                    <h5>TechCorp Inc.</h5>
+                    <div class="date">2022 - Present</div>
+                    <p>Led the development of the company's flagship product, improving performance by 40%. Collaborated with design team to implement responsive UI components.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <h4>Frontend Developer</h4>
+                    <h5>Digital Solutions LLC</h5>
+                    <div class="date">2019 - 2022</div>
+                    <p>Developed and maintained client websites using React and Node.js. Implemented modern UI/UX practices and optimized website performance.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <h4>Web Developer Intern</h4>
+                    <h5>InnoTech Startups</h5>
+                    <div class="date">2018 - 2019</div>
+                    <p>Assisted in the development of web applications. Gained hands-on experience with HTML, CSS, JavaScript and various frameworks.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills">
+            <div class="section-title">
+                <h3>Skills</h3>
+                <p>Technologies and tools I work with on a daily basis.</p>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fab fa-react" style="color: #61DAFB;"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h4>React.js</h4>
+                        <p>Building interactive user interfaces with state management</p>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fab fa-node-js" style="color: #339933;"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h4>Node.js</h4>
+                        <p>Server-side JavaScript for scalable applications</p>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fab fa-js" style="color: #F7DF1E;"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h4>JavaScript</h4>
+                        <p>ES6+ features and modern patterns</p>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fab fa-sass" style="color: #CC6699;"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h4>SASS/CSS</h4>
+                        <p>Advanced styling with preprocessors</p>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-database" style="color: #336791;"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h4>Databases</h4>
+                        <p>MongoDB, PostgreSQL, Firebase</p>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <div class="skill-icon">
+                        <i class="fas fa-mobile-alt" style="color: #A4C639;"></i>
+                    </div>
+                    <div class="skill-info">
+                        <h4>Responsive Design</h4>
+                        <p>Mobile-first approach with adaptive layouts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <div class="section-title">
+                <h3>Projects</h3>
+                <p>Some of my recent work that I'm proud of.</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-item">
+                    <img src="/api/placeholder/400/250" alt="Project 1">
+                    <h4>E-commerce Platform</h4>
+                    <p>A full-featured online store with product management, cart functionality, and payment integration.</p>
+                    <div class="tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <img src="/api/placeholder/400/250" alt="Project 2">
+                    <h4>Task Management App</h4>
+                    <p>A collaborative project management tool with real-time updates and team communication features.</p>
+                    <div class="tags">
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Tailwind CSS</span>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <img src="/api/placeholder/400/250" alt="Project 3">
+                    <h4>Portfolio Website</h4>
+                    <p>A custom portfolio website showcasing projects and skills with a modern, responsive design.</p>
+                    <div class="tags">
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">GSAP</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <div class="section-title">
+                <h3>Contact Me</h3>
+                <p>Have a project in mind? Let's work together.</p>
+            </div>
+            
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="Your Name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="Your Email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" class="form-control" placeholder="Subject">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" class="form-control" placeholder="Your Message"></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Send Message</button>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Your Name. All Rights Reserved.</p>
         </div>
-        <div class="section-2">
-            <h2>About</h2>
-            <p>I’m a results-driven marketing and brand design specialist with a passion for building engaging communities, crafting innovative brand strategies, and driving measurable growth.
-             With experience in Web3, tech, and gaming, I’ve successfully scaled brands like Ghostfruit and Airdrop Acres through storytelling, data-driven decision-making, and multi-platform engagement.
-             My expertise spans digital marketing, UI/UX, content strategy, and customer retention, leveraging tools like Adobe Suite, HubSpot, and AI-driven analytics to optimize campaigns. I thrive on 
-            creating meaningful brand experiences, fostering community loyalty, and using technology to push creative boundaries.</p>
-
-<section id="experience">
-    <h2>Experience</h2>
-
-    <div class="job">
-        <h3>Co - Founder</h3>
-        <h4>Ghostfruit</h4>
-        <ul>
-            <li>Developed and executed brand strategies, increasing recognition by 30%.</li>
-            <li>Managed multi-platform social media campaigns, achieving a 40% growth in engagement.</li>
-            <li>Conducted market research and competitor analysis to optimize creative strategy.</li>
-            <li>Help facilitate investor connections and relations.</li>
-        </ul>
-    </div>
-
-    <div class="job">
-        <h3>Founder</h3>
-        <h4>Airdrop Acres</h4>
-        <ul>
-            <li>Built and scaled a Web3 community through gamification and incentive structures.</li>
-            <li>Developed engagement-driven content to increase participation and retention.</li>
-            <li>Leveraged data analysis to refine marketing strategies and optimize user acquisition.</li>
-        </ul>
-    </div>
-
-    <div class="job">
-        <h3>Graphic & Branding Strategist</h3>
-        <h4>Corporpose</h4>
-        <ul>
-            <li>Worked in a marketing agency specializing in branding, digital campaigns, and interactive design.</li>
-            <li>Worked with startups to refine brand identity and implement data-driven growth strategies.</li>
-            <li>Optimized social engagement through creative storytelling and targeted campaigns.</li>
-            <li>Help brands with SEO outreach.</li>
-        </ul>
-    </div>
-</section>
-
-   <div class="job">
-        <h3>Event Coordinator & Director</h3>
-        <h4>PudgyPenguins | iCreateProductions</h4>
-        <ul>
-            <li>Event Coordination and merchandise placement.</li>
-            <li>Event directing and communication direction.</li>
-            <li>Human Relations.</li>
-            <li>Community Lead.</li>
-        </ul>
-    </div>
-</section>
-            <h2>Skills</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis in maiores autem quidem obcaecati excepturi! Cupiditate eaque itaque magni voluptatibus neque nobis est dolor? Atque sunt minus ipsa asperiores. At.</p>
-            <h2>Projects</h2>
-            <a href="#">Project 1</a>
-            <a href="#">Project 2</a>
-            <a href="#">Project 3</a>
-            <a href="#">Project 4</a>
-            <a href="#">Project 5</a>
-            <h2>Contact</h2>
-            <p>myEmail@email.com</p>
-        </div>
-    </div>
+    </footer>
 </body>
 </html>
